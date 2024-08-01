@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/createUser.dto';
 import { ListUsersDto } from './dto/listUsers.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
+import { registrationGenerator } from './utils/registrationGenerator';
 
 @Injectable()
 export class UserService {
@@ -16,6 +17,7 @@ export class UserService {
   async createUser(createUserDto: CreateUserDto) {
     const user = new UserEntity();
     Object.assign(user, createUserDto as UserEntity);
+    user.registration = registrationGenerator(5);
 
     return await this.userRepository.save(user);
   }
@@ -39,15 +41,23 @@ export class UserService {
 
   async findUserById(id: string) {
     const user = await this.userRepository.findOneBy({ id });
-
     if (user === null) {
       throw new NotFoundException('Usuário não encontrado!');
     }
 
-    return user;
+    const userDto = new ListUsersDto(
+      user.id,
+      user.name,
+      user.registration,
+      user.email,
+      user.cpf,
+      user.birthday,
+    );
+
+    return userDto;
   }
 
-  async findUserByRegistration(registration: number) {
+  async findUserByRegistration(registration: string) {
     const user = await this.userRepository.findOneBy({ registration });
 
     if (user == null) {
@@ -56,6 +66,16 @@ export class UserService {
 
     return user;
   }
+
+  /*
+  async buscaPetGenerico<T extends keyof UserEntity>(
+    campo: T,
+    valor: UserEntity[T],
+  ): Promise<UserEntity[]> {
+    const users = await this.userRepository.find({ where: { [campo]: valor } });
+    return users;
+  }
+  */
 
   async findUserGeneric(params: any | any[]) {
     const users = await this.userRepository.findBy(params);
