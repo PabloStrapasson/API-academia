@@ -106,7 +106,7 @@ export class UserService {
 
     Object.assign(user, updateUserDto as UserEntity);
 
-    return this.userRepository.save(user);
+    return await this.userRepository.save(user);
   }
 
   async removeUser(id: string) {
