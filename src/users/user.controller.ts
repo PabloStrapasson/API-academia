@@ -53,9 +53,11 @@ export class UserController {
     };
   }
 
-  @Get(':id')
-  async findOneUserById(@Param('id') id: string) {
-    const user = await this.userService.findUserById(id);
+  @Get('search')
+  async findOneUserByRegistration(
+    @Query('resgistration') registration: string,
+  ) {
+    const user = await this.userService.findUserByRegistration(registration);
 
     return {
       data: user,
@@ -63,11 +65,9 @@ export class UserController {
     };
   }
 
-  @Get('search')
-  async findOneUserByRegistration(
-    @Query('resgistration') registration: string,
-  ) {
-    const user = await this.userService.findUserByRegistration(registration);
+  @Get(':id')
+  async findOneUserById(@Param('id') id: string) {
+    const user = await this.userService.findUserById(id);
 
     return {
       data: user,
@@ -91,7 +91,7 @@ export class UserController {
 
     return {
       data: removedUser,
-      message: 'Usuário deletadocom sucesso',
+      message: 'Usuário deletado com sucesso',
     };
   }
 }

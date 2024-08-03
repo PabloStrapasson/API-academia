@@ -7,7 +7,7 @@ import {
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-@ValidatorConstraint({ async: true })
+@ValidatorConstraint({ async: false })
 export class CPFValidator implements ValidatorConstraintInterface {
   reduceArray(arrayDigits: string): number {
     let sum = 0;
