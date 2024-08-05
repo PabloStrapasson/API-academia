@@ -36,9 +36,9 @@ export class JobController {
     };
   }
 
-  @Get(':id')
-  async findJobById(@Param('id') id: string) {
-    const job = await this.jobService.findJobById(id);
+  @Get('search')
+  async findJobByName(@Query('name') name: string) {
+    const job = await this.jobService.findJobByName(name);
 
     return {
       data: job,
@@ -46,9 +46,9 @@ export class JobController {
     };
   }
 
-  @Get('search')
-  async findJobByName(@Query('name') name: string) {
-    const job = await this.jobService.findJobByName(name);
+  @Get(':id')
+  async findJobById(@Param('id') id: string) {
+    const job = await this.jobService.findJobById(id);
 
     return {
       data: job,
