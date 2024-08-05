@@ -3,10 +3,12 @@ import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
+  Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
+@Entity({ name: 'users' })
 export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -21,8 +23,8 @@ export class UserEntity {
   cpf: string;
 
   //@Transform((birthday) => birthday.format('DD/MM/YY'))
-  @Column({ name: 'birthday', length: 10, nullable: false })
-  birthday: Date;
+  @Column({ name: 'birthday', nullable: false })
+  birthday: string; // Date
 
   @Exclude()
   @Column({ name: 'password', length: 255, nullable: false })

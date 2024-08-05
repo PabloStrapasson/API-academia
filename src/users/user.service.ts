@@ -64,7 +64,16 @@ export class UserService {
       throw new NotFoundException('Usuário não encontrado!');
     }
 
-    return user;
+    const userDto = new ListUsersDto(
+      user.id,
+      user.name,
+      user.registration,
+      user.email,
+      user.cpf,
+      user.birthday,
+    );
+
+    return userDto;
   }
 
   /*
@@ -99,14 +108,23 @@ export class UserService {
 
   async updateUser(id: string, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOneBy({ id });
-
     if (user === null) {
       throw new NotFoundException('Usuário não encontrado!');
     }
 
     Object.assign(user, updateUserDto as UserEntity);
+    const updatedUser = await this.userRepository.save(user);
 
-    return this.userRepository.save(user);
+    const userDto = new ListUsersDto(
+      updatedUser.id,
+      updatedUser.name,
+      updatedUser.registration,
+      updatedUser.email,
+      updatedUser.cpf,
+      updatedUser.birthday,
+    );
+
+    return userDto;
   }
 
   async removeUser(id: string) {

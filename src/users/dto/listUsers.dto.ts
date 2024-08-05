@@ -5,6 +5,6 @@ export class ListUsersDto {
     readonly registration: string,
     readonly email: string,
     readonly cpf: string,
-    readonly bithday: Date,
+    readonly bithday: string, // Date
   ) {}
 }

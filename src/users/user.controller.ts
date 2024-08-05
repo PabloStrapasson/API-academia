@@ -53,16 +53,6 @@ export class UserController {
     };
   }
 
-  @Get(':id')
-  async findOneUserById(@Param('id') id: string) {
-    const user = await this.userService.findUserById(id);
-
-    return {
-      data: user,
-      message: 'Usuário encontrado com sucesso!',
-    };
-  }
-
   @Get('search')
   async findOneUserByRegistration(
     @Query('resgistration') registration: string,
@@ -75,9 +65,19 @@ export class UserController {
     };
   }
 
+  @Get(':id')
+  async findOneUserById(@Param('id') id: string) {
+    const user = await this.userService.findUserById(id);
+
+    return {
+      data: user,
+      message: 'Usuário encontrado com sucesso!',
+    };
+  }
+
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    const updatedUser = this.userService.updateUser(id, updateUserDto);
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    const updatedUser = await this.userService.updateUser(id, updateUserDto);
 
     return {
       data: updatedUser,
@@ -86,12 +86,12 @@ export class UserController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    const removedUser = this.userService.removeUser(id);
+  async remove(@Param('id') id: string) {
+    const removedUser = await this.userService.removeUser(id);
 
     return {
       data: removedUser,
-      message: 'Usuário deletadocom sucesso',
+      message: 'Usuário deletado com sucesso',
     };
   }
 }

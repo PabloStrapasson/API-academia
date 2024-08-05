@@ -29,7 +29,7 @@ export class CreateUserDto {
       'A senha deve conter pelo menos uma letra minúscula, uma letra maiúscula, um dígito, um caractere especial e ter entre 8 e 30 caracteres',
   })*/
   @IsNotEmpty({ message: 'A data de nascimento é obrigatória' })
-  birthday: Date;
+  birthday: string; // Date
 
   @MinLength(8, { message: 'A senha precisa ter pelo menos 8 caracteres' })
   @Matches(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,30}$/, {
