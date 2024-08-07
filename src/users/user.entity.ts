@@ -22,9 +22,8 @@ export class UserEntity {
   @Column({ name: 'cpf', length: 14, nullable: false })
   cpf: string;
 
-  //@Transform((birthday) => birthday.format('DD/MM/YYYY'))
   @Column({ name: 'birthday', nullable: false })
-  birthday: string; // Date
+  birthday: Date;
 
   @Exclude()
   @Column({ name: 'password', length: 255, nullable: false })

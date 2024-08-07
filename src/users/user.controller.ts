@@ -12,6 +12,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { HashPasswordPipe } from '../resources/pipes/hashPassword.pipe';
+import { CreateDatePipe } from 'src/resources/pipes/createDate.pipe';
 
 @Controller('users')
 export class UserController {
@@ -20,12 +21,14 @@ export class UserController {
   @Post()
   async createUser(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    @Body() { password, ...createUserDto }: CreateUserDto,
+    @Body() { password, birthday, ...createUserDto }: CreateUserDto,
     @Body('password', HashPasswordPipe) hashPassword: string,
+    @Body('birthday', CreateDatePipe) birthdayDate: Date,
   ) {
     const newUser = await this.userService.createUser({
       ...createUserDto,
       password: hashPassword,
+      birthday: birthdayDate,
     });
 
     return {

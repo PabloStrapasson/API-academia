@@ -24,7 +24,7 @@ export class CreateUserDto {
   cpf: string;
 
   @IsNotEmpty({ message: 'A data de nascimento é obrigatória' })
-  birthday: string; // Date
+  birthday: Date;
 
   @MinLength(8, { message: 'A senha precisa ter pelo menos 8 caracteres' })
   @Matches(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,30}$/, {
