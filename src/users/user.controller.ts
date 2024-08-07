@@ -12,7 +12,6 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/createUser.dto';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { HashPasswordPipe } from '../resources/pipes/hashPassword.pipe';
-import { ListUsersDto } from './dto/listUsers.dto';
 
 @Controller('users')
 export class UserController {
@@ -30,23 +29,15 @@ export class UserController {
     });
 
     return {
-      data: new ListUsersDto(
-        newUser.id,
-        newUser.name,
-        newUser.registration,
-        newUser.email,
-        newUser.cpf,
-        newUser.birthday,
-      ),
+      data: newUser,
       message: 'Usuário cadastrado com sucesso!',
     };
-
-    //return this.userService.createUser(createUserDto);
   }
 
   @Get()
   async findAllUsers() {
     const allUsers = await this.userService.findAllUsers();
+
     return {
       data: allUsers,
       message: 'Usuários encontrados com sucesso!',

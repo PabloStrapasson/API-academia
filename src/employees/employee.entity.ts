@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer';
+import { EnumJobs } from '../enum/jobsEnum';
 import {
   Column,
   CreateDateColumn,
@@ -8,8 +8,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'users' })
-export class UserEntity {
+@Entity({ name: 'employees' })
+export class EmployeeEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -22,16 +22,14 @@ export class UserEntity {
   @Column({ name: 'cpf', length: 14, nullable: false })
   cpf: string;
 
-  //@Transform((birthday) => birthday.format('DD/MM/YYYY'))
   @Column({ name: 'birthday', nullable: false })
-  birthday: string; // Date
+  birthday: Date;
 
-  @Exclude()
   @Column({ name: 'password', length: 255, nullable: false })
   password: string;
 
-  @Column({ name: 'registration', length: 10, nullable: false })
-  registration: string;
+  @Column()
+  job: EnumJobs;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;
@@ -41,6 +39,4 @@ export class UserEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string;
-
-  // plan: PlanEntity
 }
