@@ -18,8 +18,18 @@ export class UserService {
     const user = new UserEntity();
     Object.assign(user, createUserDto as UserEntity);
     user.registration = registrationGenerator(5);
+    const newUser = await this.userRepository.save(user);
 
-    return await this.userRepository.save(user);
+    const userDto = new ListUsersDto(
+      newUser.id,
+      newUser.name,
+      newUser.registration,
+      newUser.email,
+      newUser.cpf,
+      newUser.birthday,
+    );
+
+    return userDto;
   }
 
   async findAllUsers() {

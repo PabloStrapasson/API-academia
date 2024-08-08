@@ -60,7 +60,5 @@ export class JobService {
     if (!result.affected) {
       throw new NotFoundException('Cargo não encontrado!');
     }
-
-    return `This action removes a #${id} job`;
   }
 }

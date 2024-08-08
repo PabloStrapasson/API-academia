@@ -1,15 +1,17 @@
 import {
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { UniqueEmail } from '../validation/uniqueEmailValidator';
 import { IsValidCPF } from '../../resources/validation/cpfValidator';
+import { UniqueEmail } from '../validation/uniqueEmailValidator';
+import { EnumJobs } from '../../enum/jobsEnum';
 
-export class CreateUserDto {
-  @IsNotEmpty({ message: 'O nome não pode ser vazio' })
+export class CreateEmployeeDto {
+  @IsNotEmpty({ message: 'O nome não pode ser vazio!' })
   name: string;
 
   @IsEmail(undefined, { message: 'O email informado é inválido' })
@@ -32,4 +34,8 @@ export class CreateUserDto {
       'A senha deve conter pelo menos uma letra minúscula, uma letra maiúscula, um dígito, um caractere especial e ter entre 8 e 30 caracteres',
   })
   password: string;
+
+  @IsNotEmpty()
+  @IsEnum(EnumJobs, { message: 'O valor fornecido para cargo não é valido' })
+  job: EnumJobs;
 }
