@@ -5,6 +5,7 @@ import { PostgresConfigService } from './config/postgres.config.service';
 import { ConfigModule } from '@nestjs/config';
 import { JobModule } from './jobs/job.module';
 import { EmployeeModule } from './employees/employee.module';
+import { PlanModule } from './plans/plan.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { EmployeeModule } from './employees/employee.module';
     }),
     JobModule,
     EmployeeModule,
+    PlanModule,
   ],
   controllers: [],
   providers: [],
