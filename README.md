@@ -24,7 +24,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+An API for a gym with control of clients, and its trainings and avaliations, employess and all information of the subscription plans. This project was developed with [Nest](https://github.com/nestjs/nest) framework and utilize PostgreSQL for the database, and TypeORM for the database manipulation, Swagger for the documentation, Jest for the tests and Docker to create the app containers.
+
+This project was develop for applicate and training Clean Architecture concepts.
 
 ## Installation
 
@@ -58,15 +60,12 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Docker
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+# up the app container
+$ docker compose up
+```
 
 ## License
 
